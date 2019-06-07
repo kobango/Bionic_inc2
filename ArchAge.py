@@ -97,8 +97,8 @@ class Population:
 
     def mutation(self):
         for z in self.celss:
-            r = numpy.random.randint(0, 11501)
-            if(r>11499):
+            r = numpy.random.randint(0, 15501)
+            if(r>15499):
                 z.genotype = [1,1,0,1]
                 poz = z.position
                 self.enw[poz[0],poz[1]]=3
@@ -193,11 +193,13 @@ i = 0
 A = [2]
 F = []
 K = []
-z=1000
-while (i < 10000):
+Q = []
+z=500
+while (i < 4000):
     if (divmod(i, 1000) == 0):
         numpy.random.seed(1234)
     Food = foodarray()
+    
     pop.live(Food)
     pop.killweak()
     pop.reproduction()
@@ -210,7 +212,7 @@ while (i < 10000):
         plt.pcolormesh(B)
 
         plt.show()
-        z =z +1000
+        z =z +20
         plt.pcolormesh(pop.enw)
         plt.show()
 
@@ -219,14 +221,41 @@ while (i < 10000):
     K.append(pop.predatornumber())
     A.append(popul)
     F.append(pop.popfood())
+    Q.append(popul-pop.predatornumber())
 
 A
 plt.subplot(3,1,1)
 
 plt.plot(A)
-
+plt.title("Liczebnośc populacji w czasie")
+plt.xlabel("Czas")
+plt.ylabel("Liczebność populacji")
+plt.grid()
 plt.subplot(3,1,2)
 plt.plot(F)
+plt.title("Średnia liczba pożywienia w populacji w czasie")
+plt.xlabel("Czas")
+plt.ylabel("Liczba pożywienia")
+plt.grid()
 plt.subplot(3,1,3)
 plt.plot(K)
+plt.title("Liczba drapieżników w czasie")
+plt.xlabel("Czas")
+plt.ylabel("Liczba drapieżników")
+plt.grid()
+plt.show()
+
+
+plt.subplot(2,1,1)
+plt.plot(Q)
+plt.title("Liczba ofiar w czasie")
+plt.xlabel("Czas")
+plt.ylabel("Liczba ofiar")
+plt.grid()
+plt.subplot(2,1,2)
+plt.plot(K)
+plt.title("Liczba drapieżników w czasie")
+plt.xlabel("Czas")
+plt.ylabel("Liczba drapieżników")
+plt.grid()
 plt.show()
